@@ -53,11 +53,15 @@ workflow VUMCPlink2 {
     }
   }
 
+  Array[File] all_output_pgen = Plink2.output_pgen
+  Array[File] all_output_pvar = Plink2.output_pvar
+  Array[File] all_output_psam = Plink2.output_psam
+  
   call MergePgenFiles {
     input:
-      pgen_files = Plink2.output_pgen,
-      pvar_files = Plink2.output_pvar,
-      psam_files = Plink2.output_psam,
+      pgen_files = all_output_pgen,
+      pvar_files = all_output_pvar,
+      psam_files = all_output_psam,
       output_prefix = target_prefix
   }
 
