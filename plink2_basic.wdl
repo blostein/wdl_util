@@ -10,7 +10,7 @@ workflow VUMCPlink2 {
     Array[String] chromosomes
 
     String target_prefix
-    String plink_option
+    String? plink_option
     String target_gcp_folder
     String project_id
 
@@ -86,7 +86,7 @@ task Plink2 {
     File source_pvar
     File source_psam
 
-    String plink_option
+    String? plink_option
     String out_string
 
     String? parameter_file1_arg
