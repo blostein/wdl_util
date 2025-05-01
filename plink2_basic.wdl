@@ -2,9 +2,9 @@ version 1.0
 
 workflow VUMCPlink2 {
   input {
-    String? input_geno = --bed
-    String? input_samples = --fam
-    String? input_snps = --bim
+    String? input_geno = "--bed"
+    String? input_samples = "--fam"
+    String? input_snps = "--bim"
 
     File source_bed
     File source_bim
@@ -74,9 +74,9 @@ task Plink2 {
     File source_bim
     File source_fam
 
-    String? input_geno = --bed
-    String? input_samples = --fam
-    String? input_snps = --bim
+    String? input_geno = "--bed"
+    String? input_samples = "--fam"
+    String? input_snps = "--bim"
 
     String plink_option
 
