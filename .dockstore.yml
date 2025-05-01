@@ -1,0 +1,5 @@
+version: 1.2
+workflows:
+  - subclass: WDL
+    primaryDescriptorPath: /plink2_basic.wdl
+    name: basic_plink_wdl
