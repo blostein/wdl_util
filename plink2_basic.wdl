@@ -114,6 +114,7 @@ task Plink2 {
       ~{parameter_file2_arg + " " + parameter_file2} \
       ~{parameter_file3_arg + " " + parameter_file3} \
       ~{plink_option} \
+      --make-pgen \
       --out ~{out_string}
 
   >>>
