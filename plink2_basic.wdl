@@ -64,29 +64,30 @@ workflow VUMCPlink2 {
 
         memory_size = memory_size
     }
+  }
 
-    call MergePgenFiles{
-            input:
-                pgen_files = Plink2.output_pgen,
-                pvar_files = Plink2.output_pvar,
-                psam_files = Plink2.output_psam,
-                output_prefix = target_prefix
-        }
-    
-    call http_GcpUtils.MoveOrCopyThreeFiles as CopyFiles_two {
-      input:
-          source_file1 = select_first([MergePgenFiles.output_pgen]),
-          source_file2 = select_first([MergePgenFiles.output_pvar]),
-          source_file3 = select_first([MergePgenFiles.output_psam]),
-          is_move_file = false,
-          project_id = project_id,
-          target_gcp_folder = select_first([target_gcp_folder])
+  call MergePgenFiles{
+          input:
+              pgen_files = Plink2.output_pgen,
+              pvar_files = Plink2.output_pvar,
+              psam_files = Plink2.output_psam,
+              output_prefix = target_prefix
       }
+    
+  call http_GcpUtils.MoveOrCopyThreeFiles as CopyFiles_two {
+    input:
+        source_file1 = select_first([MergePgenFiles.output_pgen]),
+        source_file2 = select_first([MergePgenFiles.output_pvar]),
+        source_file3 = select_first([MergePgenFiles.output_psam]),
+        is_move_file = false,
+        project_id = project_id,
+        target_gcp_folder = select_first([target_gcp_folder])
+    }
 
-    output {
+  output {
       Array[File] ancestry_outputs = select_all([CopyFiles_two.output_file1, CopyFiles_two.output_file2, CopyFiles_two.output_file3])
     }
-  }
+}
 
 task Plink2 {
   input {
