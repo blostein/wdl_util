@@ -39,9 +39,9 @@ workflow VUMCPlink2 {
       source_bim = source_bim,
       source_fam = source_fam,
 
-      input_geno = input_geno
-      input_samples = input_samples
-      input_snps = input_snps
+      input_geno = input_geno,
+      input_samples = input_samples,
+      input_snps = input_snps,
 
       plink_option = plink_option,
 
