@@ -56,7 +56,7 @@ workflow VUMCPlink2 {
         parameter_file3_arg = parameter_file3_arg,
         parameter_file3 = parameter_file3,
 
-        target_prefix = my_target_prefix,
+        out_string = my_target_prefix,
 
         expected_files = expect_file,
 
@@ -91,15 +91,12 @@ workflow VUMCPlink2 {
 
 task Plink2 {
   input {
-    File source_bed
-    File source_bim
-    File source_fam
-
-    String? input_geno = "--bed"
-    String? input_samples = "--fam"
-    String? input_snps = "--bim"
+    File source_pgen
+    File source_pvar
+    File source_psam
 
     String plink_option
+    String out_string
 
     String? parameter_file1_arg
     File? parameter_file1
@@ -120,14 +117,14 @@ task Plink2 {
   command <<<
 
   plink2 \
-    ~{input_geno + " " + source_bed} \
-    ~{input_samples + " " + source_fam} \
-    ~{input_snps + " " + source_bim} \
+    --pgen {source_pgen} \
+    --pvar {source_pvar} \
+    --psam {source_psam} \
     ~{parameter_file1_arg + " " + parameter_file1} \
     ~{parameter_file2_arg + " " + parameter_file2} \
     ~{parameter_file3_arg + " " + parameter_file3} \
     ~{plink_option} \
-    --out ~{target_prefix}
+    --out ~{out_string}
 
   >>>
 
