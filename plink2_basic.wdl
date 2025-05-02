@@ -106,7 +106,7 @@ task Plink2 {
     Int? memory_size = 10
   }
 
-  Int disk_size = ceil(size(source_pgen, "GB") * 2) + 2
+  Int disk_size = ceil(size(source_pgen, "GB") * 3) + 2
 
   command <<<
 
